@@ -3,42 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ExerciseBBB</title>
+    <title>ExerciseBBB PRO</title>
     <style>
         :root {
-            --bg-color: #0d0d0d; --container-bg: #161616; --panel-bg: #222222;
-            --text-color: #f5f5f5; --accent-color: #ff7b00; --accent-hover: #e06c00; --border-color: #333;
+            --bg-color: #030303; 
+            --container-bg: rgba(18, 18, 21, 0.7); 
+            --panel-bg: rgba(26, 26, 31, 0.8);
+            --text-color: #f5f5f7; 
+            --accent-color: #ff7b00; 
+            --accent-hover: #ff9533; 
+            --border-color: rgba(255, 255, 255, 0.08);
+            --input-bg: rgba(10, 10, 12, 0.6);
+            --glow: 0 0 20px rgba(255, 123, 0, 0.15);
         }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; padding: 20px; display: flex; justify-content: center; }
-        #login-section { max-width: 400px; width: 100%; margin-top: 10vh; }
-        #app-section { max-width: 800px; width: 100%; display: none; }
-        .box { background-color: var(--container-bg); padding: 30px; border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-        h1, h2, h4 { color: var(--accent-color); text-align: center; margin-bottom: 20px; }
         
-        input { width: 100%; padding: 12px; margin: 5px 0 15px 0; background: #1a1a1a; border: 1px solid var(--border-color); color: white; border-radius: 8px; box-sizing: border-box; }
-        button { width: 100%; background: var(--accent-color); color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; margin-top: 5px; transition: 0.2s; }
-        button:hover { background: var(--accent-hover); }
-        .btn-secondary { background: #333; margin-top: 10px; }
-        
-        .tabs { display: flex; border-bottom: 2px solid var(--border-color); margin-bottom: 20px; gap: 10px; }
-        .tab-btn { flex: 1; background: transparent; color: #888; padding: 12px; border: none; cursor: pointer; font-weight: bold; }
-        .tab-btn.active { color: var(--accent-color); border-bottom: 3px solid var(--accent-color); }
-        
-        .sub-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-        .sub-btn { flex: 1; background: #222; color: #aaa; padding: 8px; border: 1px solid #333; cursor: pointer; border-radius: 6px; font-size: 13px; }
-        .sub-btn.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+        /* Fondo con detalles luminosos sutiles */
+        body { 
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 123, 0, 0.1) 0px, transparent 40%),
+                radial-gradient(at 100% 100%, rgba(255, 123, 0, 0.05) 0px, transparent 40%);
+            background-attachment: fixed;
+            color: var(--text-color); 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            padding: 20px 15px 40px 15px; 
+            display: flex; 
+            justify-content: center; 
+            min-height: 100vh;
+            box-sizing: border-box;
+            margin: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-        .tab-content, .sub-content { display: none; }
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+
+        #login-section { max-width: 400px; width: 100%; margin-top: 15vh; }
+        #app-section { max-width: 850px; width: 100%; display: none; }
+        
+        /* Cajas principales con Glassmorphism */
+        .box { 
+            background: var(--container-bg); 
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 25px; 
+            border-radius: 28px; 
+            border: 1px solid var(--border-color); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 1px 1px rgba(255,255,255,0.05); 
+        }
+
+        h1 { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            letter-spacing: -1px; 
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center; 
+            margin-bottom: 25px; 
+            filter: drop-shadow(0 2px 4px rgba(255,123,0,0.2));
+        }
+
+        h2 { font-size: 1.5rem; color: #fff; font-weight: 700; text-align: center; margin-top: 0; margin-bottom: 20px; }
+        h3 { font-size: 1.1rem; color: #e4e4e7; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px;}
+        
+        input[type="text"], input[type="password"], input[type="number"] { 
+            width: 100%; padding: 15px; margin: 6px 0 16px 0; background: var(--input-bg); 
+            border: 1px solid var(--border-color); color: white; border-radius: 14px; 
+            box-sizing: border-box; font-size: 15px; transition: all 0.3s ease;
+        }
+        input:focus {
+            border-color: var(--accent-color); 
+            box-shadow: 0 0 0 4px rgba(255,123,0,0.1); 
+            outline: none;
+        }
+        
+        button { 
+            width: 100%; background: linear-gradient(135deg, var(--accent-color), #e66a00); 
+            color: white; padding: 15px; border: none; border-radius: 14px; 
+            cursor: pointer; font-weight: 700; font-size: 15px; text-transform: uppercase; 
+            letter-spacing: 1px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: 0 4px 15px rgba(255,123,0,0.3);
+        }
+        button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,123,0,0.4); }
+        button:active { transform: translateY(1px); }
+        
+        .btn-secondary { background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); color: #d1d1d6; box-shadow: none; margin-top: 10px; }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        
+        /* Temporizador Estilizado y Animado */
+        .timer-sector {
+            background: linear-gradient(145deg, rgba(24,24,29,0.8), rgba(18,18,21,0.8)); 
+            border: 1px solid var(--border-color); border-radius: 20px; padding: 20px; 
+            margin-bottom: 25px; display: flex; align-items: center; justify-content: space-between;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            transition: box-shadow 0.3s;
+        }
+        .timer-sector.active { box-shadow: inset 0 0 20px rgba(255,123,0,0.1), 0 0 15px rgba(255,123,0,0.15); border-color: rgba(255,123,0,0.3); }
+        .timer-display-wrapper { display: flex; flex-direction: column; }
+        .timer-label { font-size: 11px; text-transform: uppercase; color: #888; font-weight: 800; letter-spacing: 1px; margin-bottom: 4px;}
+        .timer-clock { font-family: 'Courier New', Courier, monospace; font-size: 40px; font-weight: 800; color: var(--accent-color); line-height: 1; text-shadow: var(--glow); }
+        .timer-actions { display: flex; gap: 8px; }
+        .timer-actions button { padding: 12px 18px; font-size: 13px; width: auto; margin: 0; box-shadow: none; }
+
+        /* Navegación Principal */
+        .tabs { 
+            display: flex; background: rgba(0,0,0,0.4); padding: 6px; border-radius: 18px; 
+            border: 1px solid var(--border-color); margin-bottom: 25px; gap: 4px; 
+        }
+        .tab-btn { 
+            flex: 1; background: transparent; color: #71717a; padding: 12px 5px; 
+            border: none; cursor: pointer; font-weight: 700; border-radius: 14px; 
+            font-size: 14px; transition: all 0.3s ease; text-transform: capitalize; box-shadow: none;
+        }
+        .tab-btn:hover { color: #fff; }
+        .tab-btn.active { color: #fff; background: var(--panel-bg); box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+        
+        /* Novedad: Grid para Baloncesto (2 Columnas en pantallas grandes) */
+        .basket-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .basket-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .basket-col { display: flex; flex-direction: column; gap: 15px; }
+
+        /* Sub-Navegación Baloncesto */
+        .sub-tabs { display: flex; gap: 6px; background: rgba(0,0,0,0.3); padding: 5px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .sub-btn { flex: 1; background: transparent; color: #888; padding: 10px; border: none; cursor: pointer; border-radius: 8px; font-size: 13px; font-weight: 700; box-shadow: none; transition: 0.3s; }
+        .sub-btn.active { background: rgba(255,255,255,0.1); color: white; }
+
+        .tab-content, .sub-content { display: none; animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .tab-content.active, .sub-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        .marco-seccion { background: #1a1a1a; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #2a2a2a; }
+        .marco-seccion { background: var(--panel-bg); padding: 20px; border-radius: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .input-group { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; margin-bottom: 10px; }
         
-        ul { list-style: none; padding: 0; }
-        li { display: grid; grid-template-columns: 40px 1fr auto 40px; align-items: center; background: #161616; padding: 14px; margin-bottom: 8px; border-radius: 10px; border: 1px solid #222; gap: 10px; }
-        li.completado { opacity: 0.5; filter: grayscale(1); }
-        .btn-borrar { background: none; color: #555; border: none; cursor: pointer; font-size: 20px; }
-        .btn-borrar:hover { color: #ff4444; }
-        .reps-text { color: var(--accent-color); font-weight: bold; font-size: 0.9em; min-width: 60px; text-align: right; }
+        /* Listas de Ejercicios Mejoradas */
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { 
+            display: grid; grid-template-columns: 40px 1fr auto 40px; align-items: center; 
+            background: rgba(255,255,255,0.03); padding: 15px; margin-bottom: 12px; border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.05); gap: 12px; transition: all 0.3s ease;
+        }
+        li:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,123,0,0.3); transform: translateX(4px); }
+        li.completado { opacity: 0.4; filter: grayscale(1); background: rgba(0,0,0,0.2); border-color: transparent; }
+        li.completado:hover { transform: none; }
+        li.completado span:first-of-type { text-decoration: line-through; }
+        
+        input[type="checkbox"] { width: 22px; height: 22px; margin: 0; cursor: pointer; accent-color: var(--accent-color); }
+        
+        .btn-borrar { background: none; color: #555; border: none; cursor: pointer; font-size: 24px; padding: 0; line-height: 1; transition: color 0.2s; box-shadow: none; }
+        .btn-borrar:hover { color: #ef4444; transform: scale(1.1); }
+        .reps-text { color: var(--accent-color); font-weight: 800; font-size: 0.9em; background: rgba(255,123,0,0.1); padding: 6px 12px; border-radius: 10px; min-width: 45px; text-align: center; border: 1px solid rgba(255,123,0,0.2); }
+        
+        /* Calendario */
+        .calendario-header { text-align: center; margin-bottom: 20px; }
+        .mes-titulo { font-size: 1.3rem; font-weight: 800; color: #fff; text-transform: capitalize; margin: 0; text-shadow: var(--glow); }
+        .grid-dias-semana { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center; font-size: 12px; color: #888; font-weight: bold; margin-bottom: 10px; }
+        .grid-calendario { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+        .dia-cal { 
+            aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
+            background: rgba(255,255,255,0.02); border-radius: 14px; font-size: 14px; font-weight: 700; color: #a1a1aa; border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .dia-cal.vacio { background: transparent; border: none; }
+        .dia-cal.hoy { border-color: rgba(255,255,255,0.4); color: #fff; }
+        .dia-cal.entrenado { background: linear-gradient(135deg, var(--accent-color), #e66a00); color: #fff; border-color: transparent; box-shadow: var(--glow); }
+
+        /* Sector de Copia de Seguridad */
+        .backup-sector { background: rgba(0,0,0,0.2); border: 1px dashed rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; margin-top: 35px; margin-bottom: 15px; }
+        .backup-title { font-size: 11px; text-transform: uppercase; color: #888; letter-spacing: 1.5px; font-weight: bold; margin-bottom: 15px; text-align: center;}
+        .backup-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .backup-actions button { margin: 0; padding: 12px; font-size: 12px; }
     </style>
 </head>
 <body>
@@ -46,115 +188,261 @@
     <div id="login-section">
         <div class="box">
             <h1>ExerciseBBB</h1>
-            <input type="text" id="username" placeholder="Usuario">
-            <input type="password" id="password" placeholder="Contraseña">
+            <input type="text" id="username" placeholder="👤 Usuario">
+            <input type="password" id="password" placeholder="🔒 Contraseña">
             <button onclick="iniciarSesion()">Entrar</button>
-            <button class="btn-secondary" onclick="registrarUsuario()">Registrarse</button>
-            <p id="login-msg" style="text-align:center; color:#ff4444; font-size: 14px;"></p>
+            <button class="btn-secondary" onclick="registrarUsuario()">Crear cuenta</button>
+            <p id="login-msg" style="text-align:center; color:#ef4444; font-size: 14px; margin-top: 15px; font-weight: 600;"></p>
         </div>
     </div>
 
     <div id="app-section">
         <div class="box">
             <h2 id="titulo-usuario">Tus Rutinas</h2>
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab(event, 'gym')">🏋️ Gimnasio</button>
-                <button class="tab-btn" onclick="switchTab(event, 'basket')">🏀 Baloncesto</button>
+            
+            <!-- Temporizador -->
+            <div class="timer-sector" id="timer-box">
+                <div class="timer-display-wrapper">
+                    <span class="timer-label">⏱️ Cronómetro</span>
+                    <span class="timer-clock" id="timer-clock-display">00:00</span>
+                </div>
+                <div class="timer-actions">
+                    <button id="timer-control-btn" onclick="toggleTimer()">▶ Play</button>
+                    <button class="btn-secondary" onclick="resetTimer()">↻</button>
+                </div>
             </div>
 
+            <!-- Navegación Principal -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'gym')">🏋️ Gym</button>
+                <button class="tab-btn" onclick="switchTab(event, 'basket')">🏀 Basket</button>
+                <button class="tab-btn" onclick="switchTab(event, 'calendario')">📅 Historial</button>
+            </div>
+
+            <!-- Contenido: GIMNASIO -->
             <div id="gym" class="tab-content active">
-                <div class="marco-seccion"><input type="text" id="ej-gym" placeholder="Nombre ejercicio"><input type="text" id="reps-gym" placeholder="Reps / Series"><button onclick="add('gym')">Añadir</button></div>
+                <div class="marco-seccion">
+                    <div class="input-group">
+                        <input type="text" id="ej-gym" placeholder="Ej: Press Banca">
+                        <input type="text" id="reps-gym" placeholder="Reps">
+                    </div>
+                    <button onclick="add('gym')">➕ Añadir Ejercicio</button>
+                </div>
                 <ul id="list-gym"></ul>
             </div>
 
+            <!-- Contenido: BALONCESTO (GRID 2 COLUMNAS) -->
             <div id="basket" class="tab-content">
-                <div class="marco-seccion">
-                    <h4>🔥 Calentamiento</h4>
-                    <input type="text" id="ej-calentamiento" placeholder="Ejercicio">
-                    <input type="text" id="reps-calentamiento" placeholder="Duración">
-                    <button onclick="add('calentamiento')">Añadir</button>
-                </div>
-                <ul id="list-calentamiento"></ul>
+                <div class="basket-grid">
+                    
+                    <!-- COLUMNA 1: Calentamiento -->
+                    <div class="basket-col">
+                        <h3>🔥 1. Calentamiento</h3>
+                        <div class="marco-seccion">
+                            <div class="input-group">
+                                <input type="text" id="ej-calentamiento" placeholder="Ej: Movilidad">
+                                <input type="text" id="reps-calentamiento" placeholder="Min/Reps">
+                            </div>
+                            <button onclick="add('calentamiento')">➕ Añadir</button>
+                        </div>
+                        <ul id="list-calentamiento"></ul>
+                    </div>
 
-                <div class="sub-tabs">
-                    <button class="sub-btn active" onclick="switchSub(event, 'bote')">Bote</button>
-                    <button class="sub-btn" onclick="switchSub(event, 'tiro')">Tiro</button>
-                    <button class="sub-btn" onclick="switchSub(event, 'finalizacion')">Finalización</button>
-                </div>
-                <div id="bote" class="sub-content active">
-                    <div class="marco-seccion"><input type="text" id="ej-bote" placeholder="Ejercicio Bote"><input type="text" id="reps-bote" placeholder="Reps"><button onclick="add('bote')">Añadir</button></div>
-                    <ul id="list-bote"></ul>
-                </div>
-                <div id="tiro" class="sub-content">
-                    <div class="marco-seccion"><input type="text" id="ej-tiro" placeholder="Ejercicio Tiro"><input type="text" id="reps-tiro" placeholder="Reps"><button onclick="add('tiro')">Añadir</button></div>
-                    <ul id="list-tiro"></ul>
-                </div>
-                <div id="finalizacion" class="sub-content">
-                    <div class="marco-seccion"><input type="text" id="ej-finalizacion" placeholder="Ejercicio Final"><input type="text" id="reps-finalizacion" placeholder="Reps"><button onclick="add('finalizacion')">Añadir</button></div>
-                    <ul id="list-finalizacion"></ul>
+                    <!-- COLUMNA 2: Ejercicios -->
+                    <div class="basket-col">
+                        <h3>🎯 2. Ejercicios</h3>
+                        <div class="sub-tabs">
+                            <button class="sub-btn active" onclick="switchSub(event, 'bote')">Bote</button>
+                            <button class="sub-btn" onclick="switchSub(event, 'tiro')">Tiro</button>
+                            <button class="sub-btn" onclick="switchSub(event, 'finalizacion')">Finaliz.</button>
+                        </div>
+                        
+                        <div id="bote" class="sub-content active">
+                            <div class="marco-seccion">
+                                <div class="input-group"><input type="text" id="ej-bote" placeholder="Ej: Bote 2 balones"><input type="text" id="reps-bote" placeholder="Reps"></div>
+                                <button onclick="add('bote')">➕ Añadir a Bote</button>
+                            </div>
+                            <ul id="list-bote"></ul>
+                        </div>
+                        
+                        <div id="tiro" class="sub-content">
+                            <div class="marco-seccion">
+                                <div class="input-group"><input type="text" id="ej-tiro" placeholder="Ej: Tiro 5 posiciones"><input type="text" id="reps-tiro" placeholder="Reps"></div>
+                                <button onclick="add('tiro')">➕ Añadir a Tiro</button>
+                            </div>
+                            <ul id="list-tiro"></ul>
+                        </div>
+                        
+                        <div id="finalizacion" class="sub-content">
+                            <div class="marco-seccion">
+                                <div class="input-group"><input type="text" id="ej-finalizacion" placeholder="Ej: Entradas Aro Pasado"><input type="text" id="reps-finalizacion" placeholder="Reps"></div>
+                                <button onclick="add('finalizacion')">➕ Añadir a Finalización</button>
+                            </div>
+                            <ul id="list-finalizacion"></ul>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-            <button class="btn-secondary" onclick="cerrarSesion()">Cerrar Sesión</button>
+
+            <!-- Contenido: CALENDARIO -->
+            <div id="calendario" class="tab-content">
+                <div class="marco-seccion">
+                    <div class="calendario-header">
+                        <h3 class="mes-titulo" id="mes-actual">Mes</h3>
+                    </div>
+                    <div class="grid-dias-semana">
+                        <span>L</span><span>M</span><span>X</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                    </div>
+                    <div class="grid-calendario" id="grid-calendario"></div>
+                    
+                    <button onclick="marcarDiaCompletado()" style="margin-top: 25px; background: linear-gradient(135deg, #10b981, #059669);">✅ Marcar Día Superado</button>
+                </div>
+            </div>
+            
+            <!-- Seguridad y Gestión de Datos -->
+            <div class="backup-sector">
+                <div class="backup-title">💾 Datos y Seguridad</div>
+                <div class="backup-actions">
+                    <button class="btn-secondary" onclick="exportarDatos()">📥 Descargar Backup</button>
+                    <button class="btn-secondary" onclick="document.getElementById('file-import-input').click()">📤 Cargar Backup</button>
+                    <input type="file" id="file-import-input" style="display:none" onchange="importarDatos(event)">
+                </div>
+            </div>
+
+            <button class="btn-secondary" style="width: 100%; border:none; background: transparent; color: #ef4444; font-weight: bold; margin-top: 10px;" onclick="cerrarSesion()">Salir / Cerrar Sesión</button>
         </div>
     </div>
 
     <script>
         let currentUser = "";
-        function registrarUsuario() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
-            if(!user || !pass) return;
-            if(localStorage.getItem(user)) return alert("Usuario ya existe");
-            localStorage.setItem(user, pass);
-            alert("Registrado");
+        let timerSeconds = 0;
+        let timerInterval = null;
+
+        function defaultDB() {
+            return { gym:[], calentamiento:[], bote:[], tiro:[], finalizacion:[], history:[] };
         }
+
+        function registrarUsuario() {
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
+            if(!user || !pass) return;
+            if(localStorage.getItem(user)) return document.getElementById('login-msg').innerText = "⚠️ El usuario ya existe";
+            localStorage.setItem(user, pass);
+            document.getElementById('login-msg').style.color = "#10b981";
+            document.getElementById('login-msg').innerText = "✅ Registrado con éxito. Ya puedes entrar.";
+        }
+
         function iniciarSesion() {
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value.trim();
             if(localStorage.getItem(user) === pass) {
                 currentUser = user;
                 document.getElementById('login-section').style.display = 'none';
                 document.getElementById('app-section').style.display = 'block';
-                document.getElementById('titulo-usuario').innerText = "Rutinas de " + user;
+                document.getElementById('titulo-usuario').innerText = "Hola, " + user + " 👋";
                 render();
-            } else { alert("Datos incorrectos"); }
+            } else { 
+                document.getElementById('login-msg').style.color = "#ef4444";
+                document.getElementById('login-msg').innerText = "❌ Usuario o contraseña incorrectos"; 
+            }
         }
+
         function add(type) {
             const ej = document.getElementById('ej-'+type).value;
             const reps = document.getElementById('reps-'+type).value;
             if(!ej) return;
-            let db = JSON.parse(localStorage.getItem(currentUser+'_data')) || { gym:[], calentamiento:[], bote:[], tiro:[], finalizacion:[] };
+            let db = JSON.parse(localStorage.getItem(currentUser+'_data')) || defaultDB();
+            if(!db.history) db.history = []; 
             db[type].push({ej, reps, done:false});
             localStorage.setItem(currentUser+'_data', JSON.stringify(db));
             document.getElementById('ej-'+type).value = '';
             document.getElementById('reps-'+type).value = '';
             render();
         }
+
         function toggle(type, i) {
             let db = JSON.parse(localStorage.getItem(currentUser+'_data'));
             db[type][i].done = !db[type][i].done;
             localStorage.setItem(currentUser+'_data', JSON.stringify(db));
             render();
         }
+
         function borrar(type, i) {
             let db = JSON.parse(localStorage.getItem(currentUser+'_data'));
             db[type].splice(i, 1);
             localStorage.setItem(currentUser+'_data', JSON.stringify(db));
             render();
         }
+
         function render() {
-            let db = JSON.parse(localStorage.getItem(currentUser+'_data')) || { gym:[], calentamiento:[], bote:[], tiro:[], finalizacion:[] };
-            for(let type in db) {
+            let db = JSON.parse(localStorage.getItem(currentUser+'_data')) || defaultDB();
+            
+            const types = ['gym', 'calentamiento', 'bote', 'tiro', 'finalizacion'];
+            types.forEach(type => {
                 const ul = document.getElementById('list-'+type);
-                if(ul) ul.innerHTML = db[type].map((item, i) => `
+                if(ul) ul.innerHTML = (db[type] || []).map((item, i) => `
                     <li class="${item.done?'completado':''}">
                         <input type="checkbox" ${item.done?'checked':''} onchange="toggle('${type}',${i})">
-                        <span style="font-weight: 500;">${item.ej}</span>
-                        <span class="reps-text">${item.reps}</span>
+                        <span style="font-weight: 600; font-size: 15px;">${item.ej}</span>
+                        <span class="reps-text">${item.reps || '-'}</span>
                         <button class="btn-borrar" onclick="borrar('${type}',${i})">×</button>
                     </li>`).join('');
+            });
+
+            renderCalendario(db);
+        }
+
+        function getLocalIsoDate() {
+            const tzoffset = (new Date()).getTimezoneOffset() * 60000;
+            return (new Date(Date.now() - tzoffset)).toISOString().split('T')[0];
+        }
+
+        function marcarDiaCompletado() {
+            let db = JSON.parse(localStorage.getItem(currentUser+'_data')) || defaultDB();
+            if(!db.history) db.history = [];
+            
+            const hoy = getLocalIsoDate();
+            if(!db.history.includes(hoy)) {
+                db.history.push(hoy);
+                localStorage.setItem(currentUser+'_data', JSON.stringify(db));
+                render();
+                alert("¡Día guardado en tu historial! Gran trabajo 🔥");
+            } else {
+                alert("Ya habías marcado el día de hoy como completado.");
             }
         }
+
+        function renderCalendario(db) {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth();
+            
+            const opciones = { month: 'long', year: 'numeric' };
+            document.getElementById('mes-actual').innerText = date.toLocaleDateString('es-ES', opciones);
+            
+            const firstDayIndex = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            let startDay = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+            
+            let html = '';
+            for(let i = 0; i < startDay; i++) {
+                html += `<div class="dia-cal vacio"></div>`;
+            }
+            
+            const hoyStr = getLocalIsoDate();
+            const historial = db.history || [];
+
+            for(let i = 1; i <= daysInMonth; i++) {
+                let dStr = `${year}-${String(month+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+                let isEntrenado = historial.includes(dStr) ? 'entrenado' : '';
+                let isHoy = (dStr === hoyStr) ? 'hoy' : '';
+                
+                html += `<div class="dia-cal ${isEntrenado} ${isHoy}">${i}</div>`;
+            }
+            document.getElementById('grid-calendario').innerHTML = html;
+        }
+
         function switchTab(e, id) {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -168,6 +456,71 @@
             e.currentTarget.classList.add('active');
         }
         function cerrarSesion() { location.reload(); }
+
+        function toggleTimer() {
+            const btn = document.getElementById('timer-control-btn');
+            const box = document.getElementById('timer-box');
+            if(timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+                btn.innerHTML = "▶ Play";
+                btn.style.background = "linear-gradient(135deg, var(--accent-color), #e66a00)";
+                box.classList.remove('active');
+            } else {
+                btn.innerHTML = "⏸ Pausa";
+                btn.style.background = "linear-gradient(135deg, #ef4444, #dc2626)";
+                box.classList.add('active');
+                timerInterval = setInterval(() => {
+                    timerSeconds++;
+                    const m = String(Math.floor(timerSeconds / 60)).padStart(2, '0');
+                    const s = String(timerSeconds % 60).padStart(2, '0');
+                    document.getElementById('timer-clock-display').innerText = `${m}:${s}`;
+                }, 1000);
+            }
+        }
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            timerSeconds = 0;
+            document.getElementById('timer-clock-display').innerText = "00:00";
+            const btn = document.getElementById('timer-control-btn');
+            const box = document.getElementById('timer-box');
+            btn.innerHTML = "▶ Play";
+            btn.style.background = "linear-gradient(135deg, var(--accent-color), #e66a00)";
+            box.classList.remove('active');
+        }
+
+        function exportarDatos() {
+            if(!currentUser) return;
+            const data = localStorage.getItem(currentUser+'_data');
+            if(!data) return alert("Aún no tienes ejercicios guardados.");
+            const blob = new Blob([data], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ExerciseBBB_${currentUser}_backup.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+        function importarDatos(e) {
+            if(!currentUser) return;
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                try {
+                    const parsed = JSON.parse(evt.target.result);
+                    if(parsed.gym || parsed.calentamiento || parsed.bote) {
+                        localStorage.setItem(currentUser+'_data', JSON.stringify(parsed));
+                        render();
+                        alert("✅ Datos restaurados correctamente.");
+                    } else { alert("❌ Formato no válido."); }
+                } catch(err) { alert("❌ Error al leer el archivo."); }
+            };
+            reader.readAsText(file);
+        }
     </script>
 </body>
 </html>
